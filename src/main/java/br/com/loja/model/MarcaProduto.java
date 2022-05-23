@@ -2,6 +2,7 @@ package br.com.loja.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ public class MarcaProduto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="seq_marca_produto" )
 	private long id;
-	
+	@Column(nullable = false)
 	private String nomeDesc;
 
 	public long getId() {
