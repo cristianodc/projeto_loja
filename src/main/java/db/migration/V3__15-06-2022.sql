@@ -1,0 +1,1 @@
+Alter table pessoa_fisica add column tipo_pessoa character varying(255)
