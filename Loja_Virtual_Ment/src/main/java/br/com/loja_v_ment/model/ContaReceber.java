@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Objects;
 
 import br.com.loja_v_ment.enums.StatusContaReceber;
+import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -31,17 +32,33 @@ public class ContaReceber implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_conta_receber")
 	private Long id;
+	
+	@Column(nullable = false)
 	private String descricao;
+	
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private StatusContaReceber status;
 
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dtVencimento;
+	
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dtPagamento;
 
+	@Column(nullable = false)
 	private BigDecimal valorTotal;
 
+	
+	private BigDecimal valorDesconto;
+
+	@ManyToOne(targetEntity = Pessoa.class)
+	@JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_FK"))
+	private Pessoa pessoa;
+
+	
 	public Long getId() {
 		return id;
 	}
@@ -106,12 +123,7 @@ public class ContaReceber implements Serializable {
 		this.pessoa = pessoa;
 	}
 
-	private BigDecimal valorDesconto;
-
-	@ManyToOne(targetEntity = Pessoa.class)
-	@JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_FK"))
-	private Pessoa pessoa;
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

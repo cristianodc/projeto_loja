@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import br.com.loja_v_ment.enums.StatusContaPagar;
 import br.com.loja_v_ment.enums.StatusContaReceber;
+import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -32,16 +33,23 @@ public class ContaPagar implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_conta_pagar")
 	private Long id;
+	
+	@Column(nullable = false)
 	private String descricao;
 	
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private StatusContaPagar status;
 
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dtVencimento;
+	
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dtPagamento;
-
+	
+	@Column(nullable = false)
 	private BigDecimal valorTotal;
 
 	
